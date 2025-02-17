@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar QR</title>
+    <link rel="shortcut icon" href="images/descarga.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        *{
+            font-family: 'Nunito Sans';
+        }
+        h1{
+            font-family: 'Poppins';font-weight: bold !important;
+        }
+    </style>
+</head>
+<body class="py-5" style="height: 100vh;">
+
+
+
+    <div class="container my-5" style="background: #131517; max-width: 700px;width: 100%;">
+        <div class="text-center p-5 ps-2 pe-2">
+            <h1 class="mb-4"><img class="mt-0 me-3" src="images/icon_w.png" width="33" height="33" />QR Generator</h1>
+            <div style="text-align: left;">
+                <span>Text to generate</span>
+                <form id="qrForm">
+                    <div class="input-group">
+                        <input class="form-control" type="text" id="qrText" name="qrText" required />
+                        <button class="btn btn-primary" type="submit">Create QR!</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card mb-4 mt-4">
+                <div id="qrcode" class="card-body mb-0 mt-0 text-center" style="padding: 40px; background-color: #fff;"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center">
+        <div class="container text-muted py-4 py-lg-5">
+            <p class="mb-0" style="font-size: 12px;color: rgb(141,141,141);">
+                Powered by netSLW using <a href="https://davidshimjs.github.io/qrcodejs/" target="_blank">QRCodeJS</a> and <a href="https://getbootstrap.com/" target="_blank" >Bootstrap</a>
+            </p>
+        </div>
+    </footer>
+    
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/qrcode.min.js"></script>
+    <script>
+        // Función para generar el código QR
+        function generarQR(text) {
+            // Limpiar cualquier QR previo
+            document.getElementById("qrcode").innerHTML = "";
+            
+            // Generar el código QR
+            new QRCode(document.getElementById("qrcode"), {
+                text: text,
+                width: 300,
+                height: 300
+            });
+        }
+
+        // Manejar el envío del formulario
+        document.getElementById("qrForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evitar el envío del formulario
+            var text = document.getElementById("qrText").value; // Obtener el valor del input
+            generarQR(text); // Llamar a la función para generar el QR
+        });
+    </script>
+</body>
+</html>
